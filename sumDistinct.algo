@@ -1,4 +1,5 @@
-ALGORITHM sumOverlappingElement
+// solution 1
+ALGORITHM sumDistinctElement
 VAR
     tab1 : ARRAY_OF integer:= [12, 13, 6, 10];
     tab2 : ARRAY_OF integer:= [13, 10, 16, 15];
@@ -8,15 +9,24 @@ BEGIN
     FOR i FROM 0 TO tab1.length STEP 1  DO
         FOR j FROM 0 TO tab2.length STEP 1  DO
             IF (tab1[i]==tab2[j] ) THEN
-                sum=sum+tab1[i]+tab2[j]
+                tab1[i]:=0
+                tab2[j]:=0
             END_IF
         END_FOR
     END_FOR
-    Write('Sum of overlapping elements:',sum)
+
+    FOR i FROM 0 TO tab1.length STEP 1  DO
+        s:=s+tab1[i]
+    END_FOR
+
+    FOR j FROM 0 TO tab2.length STEP 1  DO
+        s:=s+tab2[j]
+    END_FOR
+    Write('Sum of distinct elements:',sum)
 END
 
 // solution 2
-ALGORITHM sumDistinctOverlappingHTable
+ALGORITHM sumDistinctElementHTable
 VAR
     tab1 : ARRAY_OF INTEGER:= [12, 13, 6, 10];
     tab2 : ARRAY_OF INTEGER:= [13, 10, 16, 15];
@@ -37,9 +47,9 @@ BEGIN
    END_FOR
 
    FOR key IN htab DO
-        IF (htab.get[key]>1) THEN
+        IF (htab.get[key]==1) THEN
             sum=sum+key
         END_IF
    END_FOR
-    Write('Sum of overlapping elements:',sum)
+    Write('Sum of distinct elements:',sum)
 END
